@@ -7,3 +7,4 @@ from .serializers import NewsSerializer
 class NewsList(viewsets.ModelViewSet):
     queryset = News.objects.all()
     serializer_class = NewsSerializer
+
