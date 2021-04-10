@@ -10,6 +10,8 @@ celery = "*"
 django-redis = "*"
 django-celery-beat = "*"
 django-celery-results = "*"
+gunicorn = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 
