@@ -5,7 +5,7 @@ from ..models import News
 
 
 class NewsApiTestCase(APITestCase):
-    def get_test(self):
+    def test_get(self):
         url = reverse('news_list')
         response = self.client.get(url)
         print(response)
