@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-47_bl%y-)k&29oszsvjvu^w!%qvold#4-j$_ol#m3a2!g*0%wh
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [ '167.99.139.254', ]
 
 # Celery Configuration Options
 CELERY_TIMEZONE = "Europe/Moscow"
@@ -86,8 +86,12 @@ WSGI_APPLICATION = 'Dtest.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'dtest',
+        'USER': 'dadmin',
+        'PASSWORD': 'dadmin123123',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
