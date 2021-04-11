@@ -28,7 +28,7 @@ class NewsApiTestCase(APITestCase):
             "content": "news for test 1"
         }
         json_data = json.dumps(data)
-        response = self.client.get(url, data=json_data, content_type='application/json')
+        response = self.client.post(url, data=json_data, content_type='application/json')
         self.assertEqual(status.HTTP_201_CREATED, response.status_code)
         self.assertEqual(3, News.objects.all().count())
 
@@ -48,5 +48,5 @@ class NewsApiTestCase(APITestCase):
         self.assertEqual(2, News.objects.all().count())
         url = reverse('delete_news', args=(self.news1.id,))
         response = self.client.delete(url)
-        self.assertEqual(status.HTTP_200_OK, response.status_code)
+        self.assertEqual(status.HTTP_204_NO_CONTENT, response.status_code)
         self.assertEqual(1, News.objects.all().count())
