@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-47_bl%y-)k&29oszsvjvu^w!%qvold#4-j$_ol#m3a2!g*0%wh
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [ '167.99.139.254', ]
+ALLOWED_HOSTS = [ '167.99.139.254', '127.0.0.1']
 
 # Celery Configuration Options
 CELERY_TIMEZONE = "Europe/Moscow"
@@ -65,7 +65,7 @@ ROOT_URLCONF = 'Dtest.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -73,6 +73,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'news.context_processors.getting_news',
             ],
         },
     },
