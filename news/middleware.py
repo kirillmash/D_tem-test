@@ -8,7 +8,7 @@ class AddHelloWorldInHeaderMiddleware:
 
     def __call__(self, request):
         response = self.get_response(request)
-        body = str(response.content, 'utf-8')
-        new_body = body.replace('</head>', '<!-HelloWorld>></head>')
-        response.content = new_body.encode('utf-8')
+        body = response.content
+        new_body = body.replace(b'</head>', b'<!-HelloWorld></head>')
+        response.content = new_body
         return response
