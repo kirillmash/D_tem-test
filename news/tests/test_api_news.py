@@ -1,5 +1,6 @@
 import json
 
+from django.contrib.auth.models import User
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
@@ -10,8 +11,10 @@ from ..serializers import NewsSerializer
 
 class NewsApiTestCase(APITestCase):
     def setUp(self):
-        self.news1 = News.objects.create(title='Test News 1', content='Contest Test 1')
-        self.news2 = News.objects.create(title='Test News 2', content='Contest Test 2')
+        self.user1 = User.objects.create(username='user1', password='password1')
+        self.news1 = News.objects.create(title='Test News 1', content='Contest Test 1', user=self.user1)
+        self.news2 = News.objects.create(title='Test News 2', content='Contest Test 2', user=self.user1)
+
 
     def test_get(self):
         url = reverse('news_list')
@@ -25,7 +28,8 @@ class NewsApiTestCase(APITestCase):
         url = reverse('add_news')
         data = {
             "title": "test news 1",
-            "content": "news for test 1"
+            "content": "news for test 1",
+            "user": self.user1.id
         }
         json_data = json.dumps(data)
         response = self.client.post(url, data=json_data, content_type='application/json')
@@ -36,7 +40,8 @@ class NewsApiTestCase(APITestCase):
         url = reverse('update_news', args=(self.news1.id,))
         data = {
             "title": self.news1.title,
-            "content": "news for test 1 updated"
+            "content": "news for test 1 updated",
+            "user": self.user1.id
         }
         json_data = json.dumps(data)
         response = self.client.put(url, data=json_data, content_type='application/json')
