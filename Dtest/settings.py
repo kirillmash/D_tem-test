@@ -12,6 +12,13 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 
+import os
+import environ
+
+# Initialise environment variables
+env = environ.Env()
+environ.Env.read_env()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,12 +27,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-47_bl%y-)k&29oszsvjvu^w!%qvold#4-j$_ol#m3a2!g*0%wh'
+SECRET_KEY = env('SECRET_KEY')#4-j$_ol#m3a2!g*0%wh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG') 
 
-ALLOWED_HOSTS = [ '167.99.139.254', '127.0.0.1']
+ALLOWED_HOSTS = [env('DJANGO_ALLOWED_HOSTS')]
 
 # Celery Configuration Options
 CELERY_TIMEZONE = "Europe/Moscow"
@@ -89,10 +96,10 @@ WSGI_APPLICATION = 'Dtest.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dtest',
-        'USER': 'dadmin',
-        'PASSWORD': 'dadmin123123',
+        'ENGINE': env('POSTGRES_ENGINE'),
+        'NAME': env('POSTGRES_DB'),
+        'USER': env('POSTGRES_USER'),
+        'PASSWORD': env('POSTGRES_PASSWORD'),
         'HOST': 'localhost',
         'PORT': '',
     }
@@ -136,6 +143,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# The absolute path to the directory where collectstatic will collect static files for deployment.
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

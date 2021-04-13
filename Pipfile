@@ -12,6 +12,7 @@ django-celery-beat = "*"
 django-celery-results = "*"
 gunicorn = "*"
 psycopg2-binary = "*"
+django-environ = "*"
 
 [dev-packages]
 
